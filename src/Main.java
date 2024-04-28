@@ -38,46 +38,44 @@ public class Main {
                 // Creamos un ciclo switch para manejar las opciones seleccionadas
                 switch (seleccion) {
                     case 1:
-                        System.out.print("Capture el nombre del archivo a encriptar: ");
                         Scanner datosAprocesar = new Scanner(System.in);
+
+                        System.out.print("Capture el nombre del archivo a encriptar: ");
                         String archivoAprocesar = datosAprocesar.nextLine();
-                        int clave = datosAprocesar.nextInt();
-                        
                         System.out.println("Texto del archivo: " + lectorDeArchivo.leerArchivo(archivoAprocesar));
                         System.out.print("Capture la clave de encriptación: ");
+                        int clave = datosAprocesar.nextInt();
                         System.out.println("Resultado: ");
-                        
                         String cadenaProcesada = encriptarDesencriptar.procesarCadena(lectorDeArchivo.leerArchivo(archivoAprocesar), clave);
-                        
+
                         if (creadorDeArchivo.crearArchivo()) {
                             creadorDeArchivo.escribirCadenaProcesada(cadenaProcesada);
                         }
-                        
+
                         System.out.println("Cadena encriptada: " + cadenaProcesada);
-                        
+
                         break;
-                        
+
                     case 2:
                         DesencriptadorPorFuerzaBruta desencriptadorPorFuerzaBruta = new DesencriptadorPorFuerzaBruta();
                         datosAprocesar = new Scanner(System.in);
+
+                        System.out.print("Capture el nombre del archivo a desencriptar por fuerza bruta: ");
                         archivoAprocesar = datosAprocesar.nextLine();
-                        int intentos = datosAprocesar.nextInt();
-                        
-                        System.out.print("Capture el nombre del archivo a desencriptar por fuerza bruta: ");                        
                         System.out.println("Texto encriptado: " + lectorDeArchivo.leerArchivo(archivoAprocesar));
                         System.out.print("Determina el número de intentos: ");
-                        
+                        int intentos = datosAprocesar.nextInt();
                         desencriptadorPorFuerzaBruta.desencriptadoPorFuerzaBruta(lectorDeArchivo.leerArchivo(archivoAprocesar), intentos);
-                        
+
                         break;
-                        
+
                     case 0:
                         System.out.println("\nSaliendo del programa...");
-                        
+
                         terminar = true;
-                        
+
                         break;
-                        
+
                     default:
                         System.out.println("Solo números entre 0 y 2");
                 }
