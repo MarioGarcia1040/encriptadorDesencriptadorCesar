@@ -61,15 +61,12 @@ public class Main {
                         int intentos = datosAprocesar.nextInt();
                         desencriptadorPorFuerzaBruta.desencriptadoPorFuerzaBruta(lectorDeArchivo.leerArchivo(archivoAprocesar), intentos);
                         break;
-                    case 3:
-                        System.out.println("tres");
-                        break;
                     case 0:
                         System.out.println("\nSaliendo del programa...");
                         terminar = true;
                         break;
                     default:
-                        System.out.println("Solo números entre 0 y 3");
+                        System.out.println("Solo números entre 0 y 2");
                 }
 
             } catch (InputMismatchException e) {

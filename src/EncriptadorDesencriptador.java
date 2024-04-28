@@ -24,5 +24,4 @@ public class EncriptadorDesencriptador {
         }
         return cadenaProcesada.toString();
     }
-
 }

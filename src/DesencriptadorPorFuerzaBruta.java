@@ -8,18 +8,18 @@
 */
 public class DesencriptadorPorFuerzaBruta {
     EncriptadorDesencriptador desencriptador = new EncriptadorDesencriptador();
-    boolean desencriptadoPorFuerzaBruta (String cadenaEncriptada, int numeroDeIntentos) {
-        String resultado = null;
+
+    void desencriptadoPorFuerzaBruta(String cadenaEncriptada, int numeroDeIntentos) {
+        String resultado;
         for (int i = 1; i < numeroDeIntentos + 1; i++) {
             System.out.println("Intento #" + i);
             resultado = desencriptador.procesarCadena(cadenaEncriptada, -i); // El valor es negativo para desencriptar
             if (buscarPalabrasComunes(resultado)) {
                 System.out.println(resultado);
-                return true;
+                break;
             }
-            System.out.println(resultado);
+            System.out.println("No se encontraron coincidencias");
         }
-        return false;
     }
 
     // Buscamos las palabras más comunes en el idioma español
@@ -47,14 +47,14 @@ public class DesencriptadorPorFuerzaBruta {
                 "lado mundo planeta sol luna estrella galaxia universo clima despejado nublado lluvia nieve viento " +
                 "trueno rayo tormenta cielo este oeste sur norte derecha izquierda diagonal exterior interior";
 
-        String [] palabras = listaDePalabras.split("\\s+"); // Manejamos el espacio en blanco de las palabras
+        String[] palabras = listaDePalabras.split("\\s+"); // Manejamos el espacio en blanco de las palabras
         int palabrasEncontradas = 0;
         for (String palabra : palabras) {
-            if(cadenaProcesada.toLowerCase().contains(palabra)) {
-               palabrasEncontradas++;
+            if (cadenaProcesada.toLowerCase().contains(palabra)) {
+                palabrasEncontradas++;
             }
             if (palabrasEncontradas > 5) {
-                System.out.println("\nSe encontraron coincidencias, posible texto desencriptado\n");
+                System.out.println("Se encontraron coincidencias, posible texto desencriptado\n");
                 return true;
             }
         }
