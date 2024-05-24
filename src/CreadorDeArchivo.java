@@ -1,13 +1,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-
 /*
  Proyecto - Analizador criptografico
  Programa que encripta y desencripta archivo de texto plano usando método césar
  Clase CreadorDeArchivo - Maneja el archivo llamado "encriptado.txt" y agrega la cadena de datos encriptados de otro archivo
  Autor - Mario García. mariogarcia1040@gmail.com
- 25-Abril-2024
+ 25-Abril-2024 | 19-Mayo-2024
 */
 public class CreadorDeArchivo {
     boolean crearArchivo() {
@@ -27,12 +26,10 @@ public class CreadorDeArchivo {
         }
         return true;
     }
-
     private boolean verificarSiExisteArchivo(String rutaDelArchivo) {
         File existeArchivo = new File(rutaDelArchivo);
         return existeArchivo.exists();
     }
-
     void borrarArchivo(String rutaDelArchivo) {
         File archivoAborrar = new File(rutaDelArchivo);
         if (archivoAborrar.delete()) {
@@ -44,8 +41,7 @@ public class CreadorDeArchivo {
             System.exit(0);
         }
     }
-
-    void escribirCadenaProcesada(String cadenaAescribir) {
+    void escribirCadenaEncriptada(String cadenaAescribir) {
         Path rutaYNombreDelArchivo = FileSystems.getDefault().getPath("src/" + "encriptado.txt").toAbsolutePath();
         try {
             Files.writeString(rutaYNombreDelArchivo, cadenaAescribir, StandardOpenOption.APPEND);

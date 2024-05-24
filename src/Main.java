@@ -10,24 +10,24 @@ import java.util.Scanner;
 */
 
 public class Main {
-
     public static void main(String[] args) {
         // Scanner para capturar variables del menú
         Scanner captura = new Scanner(System.in);
         boolean terminar = false;
         int seleccion;
         // Objetos
-        EncriptadorDesencriptador encriptarDesencriptar = new EncriptadorDesencriptador();
+        DesplazarCaracter encriptarDesencriptar = new DesplazarCaracter();
         LectorDeArchivo lectorDeArchivo = new LectorDeArchivo();
         CreadorDeArchivo creadorDeArchivo = new CreadorDeArchivo();
 
         // ciclo para mostrar el menú hasta que el usuario seleccione terminar
         while (!terminar) {
-            System.out.println("-------------------------------");
+            System.out.println("\n-------------------------------");
             System.out.println("Analizador criptografico simple");
             System.out.println("-------------------------------");
             System.out.println("1.- Encriptar");
             System.out.println("2.- Desencriptar por fuerza bruta");
+            System.out.println("3.- Analizador criptpgráfico");
             System.out.println("0.- Terminar");
 
             // bloque try-catch para prevenir error de captura, si no es un número
@@ -42,14 +42,14 @@ public class Main {
 
                         System.out.print("Capture el nombre del archivo a encriptar: ");
                         String archivoAprocesar = datosAprocesar.nextLine();
-                        System.out.println("Texto del archivo: " + lectorDeArchivo.leerArchivo(archivoAprocesar));
+                        System.out.println("\nTexto del archivo:\n " + lectorDeArchivo.leerArchivo(archivoAprocesar) + "\n");
                         System.out.print("Capture la clave de encriptación: ");
                         int clave = datosAprocesar.nextInt();
-                        System.out.println("Resultado: ");
-                        String cadenaProcesada = encriptarDesencriptar.procesarCadena(lectorDeArchivo.leerArchivo(archivoAprocesar), clave);
+                        System.out.println("\nResultado: ");
+                        String cadenaProcesada = encriptarDesencriptar.desplazarCaracterDeLaCadena(lectorDeArchivo.leerArchivo(archivoAprocesar), clave);
 
                         if (creadorDeArchivo.crearArchivo()) {
-                            creadorDeArchivo.escribirCadenaProcesada(cadenaProcesada);
+                            creadorDeArchivo.escribirCadenaEncriptada(cadenaProcesada);
                         }
 
                         System.out.println("Cadena encriptada: " + cadenaProcesada);
@@ -66,6 +66,21 @@ public class Main {
                         System.out.print("Determina el número de intentos: ");
                         int intentos = datosAprocesar.nextInt();
                         desencriptadorPorFuerzaBruta.desencriptadoPorFuerzaBruta(lectorDeArchivo.leerArchivo(archivoAprocesar), intentos);
+
+                        break;
+
+                    case 3:
+                        AnalisCriptograficoPorFrecuencias analisCriptograficoPorFrecuencias = new AnalisCriptograficoPorFrecuencias();
+                        datosAprocesar = new Scanner(System.in);
+
+                        System.out.println("\nDesencriptar archivo por frecuencias estadistícas");
+                        System.out.print("\nCapture el nombre del archivo a analizar: ");
+                        archivoAprocesar = datosAprocesar.nextLine();
+                        System.out.println("Texto encriptado: " + lectorDeArchivo.leerArchivo(archivoAprocesar));
+                        analisCriptograficoPorFrecuencias.caracterQueMasApareceEnTexto(lectorDeArchivo.leerArchivo(archivoAprocesar));
+                        //analisCriptograficoPorFrecuencias.encontrarClaveConCaracterComun();
+                        //analisCriptograficoPorFrecuencias.probarClaveDeCaracterComun(lectorDeArchivo.leerArchivo(archivoAprocesar));
+                        //analisCriptograficoPorFrecuencias.probarClavesObtenidasDeCaracteresComunes();
 
                         break;
 

@@ -8,7 +8,7 @@ import java.nio.file.Path;
  Programa que encripta y desencripta archivo de texto plano usando método césar
  Clase LectorDeArchivo - Lee un archivo de texto regresandolo como cadena.
  Autor - Mario García. mariogarcia1040@gmail.com
- 24-Abril-2024
+ 24-Abril-2024 | 19-Mayo-2024
 */
 public class LectorDeArchivo {
     String leerArchivo(String archivoAleer) {
