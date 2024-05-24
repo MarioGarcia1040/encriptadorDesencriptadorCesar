@@ -15,15 +15,7 @@ public class AnalisCriptograficoPorFrecuencias {
     PalabrasComunesEnEspanol palabrasComunesEnEspanol = new PalabrasComunesEnEspanol();
     void caracterQueMasApareceEnTexto(String textoAAnalizar) {
         textoAAnalizar = textoAAnalizar.toLowerCase();
-        Map<Character, Integer> numeroDeCaracteresEncontrados = new HashMap<Character, Integer>();
-        for (int i = 0; i < textoAAnalizar.length(); i++) {
-            char caracterAAnalizar = textoAAnalizar.charAt(i);
-            if (!numeroDeCaracteresEncontrados.containsKey(caracterAAnalizar)) {
-                numeroDeCaracteresEncontrados.put(caracterAAnalizar, 1);
-            } else {
-                numeroDeCaracteresEncontrados.put(caracterAAnalizar, numeroDeCaracteresEncontrados.get(caracterAAnalizar) + 1);
-            }
-        }
+        var numeroDeCaracteresEncontrados = getCharacterIntegerHashMap(textoAAnalizar);
         int mayorNumeroDeApariciones = 0;
         char caracterMasComun = 0;
         for (Map.Entry<Character, Integer> entry : numeroDeCaracteresEncontrados.entrySet()) {
@@ -35,11 +27,25 @@ public class AnalisCriptograficoPorFrecuencias {
         System.out.println("Caracter más común en el texto: \"" + caracterMasComun + "\" aparece: " + mayorNumeroDeApariciones);
         desencriptarConClaveDeCaracterComun(caracterMasComun, textoAAnalizar);
     }
+
+    private static HashMap<Character, Integer> getCharacterIntegerHashMap(String textoAAnalizar) {
+        HashMap<Character, Integer> numeroDeCaracteresEncontrados = new HashMap<>();
+        for (int i = 0; i < textoAAnalizar.length(); i++) {
+            char caracterAAnalizar = textoAAnalizar.charAt(i);
+            if (!numeroDeCaracteresEncontrados.containsKey(caracterAAnalizar)) {
+                numeroDeCaracteresEncontrados.put(caracterAAnalizar, 1);
+            } else {
+                numeroDeCaracteresEncontrados.put(caracterAAnalizar, numeroDeCaracteresEncontrados.get(caracterAAnalizar) + 1);
+            }
+        }
+        return numeroDeCaracteresEncontrados;
+    }
+
     void desencriptarConClaveDeCaracterComun(char caracterMasComun, String cadenaEncriptada) {
         char[] caracteresComunesEnElIdioma = {' ', 'a', 'e', 'o', 's', 'r', 'n', 'i', 'l', 'd', 'u', 't'};
-        for (int i = 0; i < caracteresComunesEnElIdioma.length; i++) {
-            int valorDeClaveObtenida = caracteresComunesEnElIdioma[i] - caracterMasComun;
-            System.out.println("Caracter común: " + caracteresComunesEnElIdioma[i] + " caracter con mas apariciones: " + caracterMasComun);
+        for (char c : caracteresComunesEnElIdioma) {
+            int valorDeClaveObtenida = c - caracterMasComun;
+            System.out.println("Caracter común: " + c + " caracter con mas apariciones: " + caracterMasComun);
             System.out.println("Clave encontrada: " + valorDeClaveObtenida);
             String resultado = desplazarCaracter.desplazarCaracterDeLaCadena(cadenaEncriptada, valorDeClaveObtenida);
             if (palabrasComunesEnEspanol.buscarPalabrasComunes(resultado)) {
