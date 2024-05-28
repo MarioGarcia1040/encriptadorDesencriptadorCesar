@@ -6,11 +6,11 @@ import java.nio.file.*;
  Programa que encripta y desencripta archivo de texto plano usando método césar
  Clase CreadorDeArchivo - Maneja el archivo llamado "encriptado.txt" y agrega la cadena de datos encriptados de otro archivo
  Autor - Mario García. mariogarcia1040@gmail.com
- 25-Abril-2024 | 19-Mayo-2024
+ 25-Abril-2024 | 27-Mayo-2024
 */
 public class CreadorDeArchivo {
     boolean crearArchivo() {
-        Path rutaYNombreDelArchivo = FileSystems.getDefault().getPath("src/" + "encriptado.txt").toAbsolutePath();
+        Path rutaYNombreDelArchivo = FileSystems.getDefault().getPath("encriptado.txt");
         if (!verificarSiExisteArchivo(String.valueOf(rutaYNombreDelArchivo))) {
             try {
                 Files.createFile(rutaYNombreDelArchivo);
@@ -42,7 +42,7 @@ public class CreadorDeArchivo {
         }
     }
     void escribirCadenaEncriptada(String cadenaAescribir) {
-        Path rutaYNombreDelArchivo = FileSystems.getDefault().getPath("src/" + "encriptado.txt").toAbsolutePath();
+        Path rutaYNombreDelArchivo = FileSystems.getDefault().getPath("encriptado.txt");
         try {
             Files.writeString(rutaYNombreDelArchivo, cadenaAescribir, StandardOpenOption.APPEND);
         } catch (IOException e) {
